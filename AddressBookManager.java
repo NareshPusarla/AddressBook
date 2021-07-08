@@ -30,6 +30,10 @@ public class AddressBook {
 		contacts.add(contact);
 	}
 
+	public void delete(Contact contact) {
+		contacts.remove(contact);
+	}
+
 	public void print() {
 		for(Object contact1 : contacts) {
 			System.out.println(contact1);
