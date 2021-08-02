@@ -25,7 +25,7 @@ public class Main {
 				break;
 			case 3:
 				System.out.println("Enter the name to search: ");
-				addressBook.search(sc.next());
+				addressBook.search(sc.next(),sc.next(),sc.next());
 				break;
 			case 4:
 				System.out.println("Enter the mobile number to update the person's contact: ");

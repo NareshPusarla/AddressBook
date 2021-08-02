@@ -31,7 +31,7 @@ public class AddressBook {
 		}
 	}
 	
-	public void search(String firstName) {
+	public void search(String firstName, String city, String state) {
 		Set<Entry<Long, Contact>> entry = contactBook.entrySet();
 		for (Entry<Long, Contact> entry2 : entry) {
 			String x = entry2.getValue().getFirstName();
@@ -42,6 +42,17 @@ public class AddressBook {
 				 * else { System.out.println("not existed"); }
 			*/
 //			System.out.println(entry2.getKey()+" "+entry2.getValue());
+		}
+		
+		for (Entry<Long, Contact> entry2 : entry) {
+			String x = entry2.getValue().getCity();
+			String y = entry2.getValue().getState();
+			if(x.equals(city)) {
+				System.out.println(entry2.getValue().getFirstName());
+			}
+			if(y.equals(state)) {
+				System.out.println(entry2.getValue().getFirstName());
+			}
 		}
 	}
 
