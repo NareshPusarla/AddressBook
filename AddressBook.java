@@ -2,6 +2,8 @@ package com.bridgelbaz.addressbook;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class AddressBook {
 	Map<Long, Contact> contactBook = new HashMap<>();
@@ -19,7 +21,6 @@ public class AddressBook {
 			}
 			System.out.println("Already Existed");
 		}
-		
 	}
 
 	public void get(Long phoneNumber) {
@@ -27,6 +28,20 @@ public class AddressBook {
 			System.out.println("Contact you are trying is not existed.");
 		} else {
 			System.out.println(contactBook.get(phoneNumber));
+		}
+	}
+	
+	public void search(String firstName) {
+		Set<Entry<Long, Contact>> entry = contactBook.entrySet();
+		for (Entry<Long, Contact> entry2 : entry) {
+			String x = entry2.getValue().getFirstName();
+			if(x.equals(firstName)) {
+				System.out.println(entry2.getValue().getCity());
+			}
+			/*
+				 * else { System.out.println("not existed"); }
+			*/
+//			System.out.println(entry2.getKey()+" "+entry2.getValue());
 		}
 	}
 
