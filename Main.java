@@ -11,7 +11,7 @@ public class Main {
 		Scanner sc = ScannerUtil.sc;
 		boolean in = true;
 		while (in) {
-			System.out.println("1.Add 2.Get 3. Search 4.Update 5.Delete 6.Exit");
+			System.out.println("1.Add 2.Get 3.Search 4.Update 5.Delete 6.Print 7.Exit");
 
 			int option = sc.nextInt();
 			switch (option) {
@@ -38,6 +38,9 @@ public class Main {
 				addressBook.delete(mobileNumber);
 				break;
 			case 6:
+				addressBook.print();
+				break;
+			case 7:
 				in = false;
 				System.out.println("Successfully exited.");
 				break;

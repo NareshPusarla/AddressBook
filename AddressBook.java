@@ -1,9 +1,13 @@
 package com.bridgelbaz.addressbook;
 
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class AddressBook {
 	Map<Long, Contact> contactBook = new HashMap<>();
@@ -56,6 +60,13 @@ public class AddressBook {
 		}
 	}
 
+	public void update(Long phoneNumber) {
+		System.out.println(contactBook.get(phoneNumber));
+		System.out.println("Please enter the updated values: ");
+		Contact contact = new StudentContact();
+		contactBook.put(phoneNumber, contact);
+	}
+	
 	public void delete(Long phoneNumber) {
 		if (contactBook.get(phoneNumber) == null) {
 			System.out.println("Contact you are trying is not existed.");
@@ -64,11 +75,13 @@ public class AddressBook {
 			System.out.println("Successfully deleted.");
 		}
 	}
-
-	public void update(Long phoneNumber) {
-		System.out.println(contactBook.get(phoneNumber));
-		System.out.println("Please enter the updated values: ");
-		Contact contact = new StudentContact();
-		contactBook.put(phoneNumber, contact);
+	
+	public void print() {
+		Set<Entry<Long, Contact>> entry = contactBook.entrySet();
+		for (Entry<Long, Contact> entry2 : entry) {
+			System.out.println(entry2.getKey()+" "+entry2.getValue());
+		}	
+		Map<Long, Contact> result = (Map<Long, Contact>) contactBook.entrySet().stream().sorted();
+		System.out.println(result);
 	}
 }
