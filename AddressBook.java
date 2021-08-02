@@ -6,10 +6,20 @@ import java.util.Map;
 public class AddressBook {
 	Map<Long, Contact> contactBook = new HashMap<>();
 
-	public void add() {
+	public void add(Long phoneNumber) {
 		Contact contact = new StudentContact();
-		contactBook.put(contact.getPhoneNumber(), contact);
-		System.out.println("Successfully contact added.");
+		if(contactBook.get(contact.getPhoneNumber()) == null) {
+			contactBook.put(contact.getPhoneNumber(), contact);
+			System.out.println("Successfully contact added.");
+		}
+		else {
+			if(contactBook.get(contact.getPhoneNumber()) != contactBook.get(phoneNumber)) {
+				contactBook.put(contact.getPhoneNumber(), contact);
+				System.out.println("Successfully contact added.");
+			}
+			System.out.println("Already Existed");
+		}
+		
 	}
 
 	public void get(Long phoneNumber) {

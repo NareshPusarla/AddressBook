@@ -16,7 +16,7 @@ public class Main {
 			int option = sc.nextInt();
 			switch (option) {
 			case 1:
-				addressBook.add();
+				addressBook.add(sc.nextLong());
 				break;
 			case 2:
 				System.out.println("Enter the mobile number to check the person's contact: ");
