@@ -1,19 +1,29 @@
 package com.bridgelbaz.addressbook;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.TreeMap;
+import java.util.logging.LogManager;
+import org.apache.log4j.Logger;
 
 public class AddressBook {
+//	Logger logger = org.apache.log4j.LogManager.getLogger(AddressBook.class);
 	Map<Long, Contact> contactBook = new HashMap<>();
-
+	Scanner sc = ScannerUtil.sc;
+	
 	public void add(Long phoneNumber) {
 		Contact contact = new StudentContact();
+		
 		if(contactBook.get(contact.getPhoneNumber()) == null) {
 			contactBook.put(contact.getPhoneNumber(), contact);
 			System.out.println("Successfully contact added.");
@@ -35,29 +45,55 @@ public class AddressBook {
 		}
 	}
 	
-	public void search(String firstName, String city, String state) {
+	public void search(int number) {
 		Set<Entry<Long, Contact>> entry = contactBook.entrySet();
-		for (Entry<Long, Contact> entry2 : entry) {
-			String x = entry2.getValue().getFirstName();
-			if(x.equals(firstName)) {
-				System.out.println(entry2.getValue().getCity());
+		switch (number){
+		case 1:
+			System.out.println("Enter the firstname: ");
+			String firstName = sc.next();
+			for (Entry<Long, Contact> entry2 : entry) {
+				String x = entry2.getValue().getFirstName();
+				if(x.equals(firstName)) {
+					System.out.println(entry2.getValue().getCity());
+				}
+				else {
+					System.out.println("Entered a unexisted name. So please enter a valid name.");
+				}
 			}
-			/*
-				 * else { System.out.println("not existed"); }
-			*/
-//			System.out.println(entry2.getKey()+" "+entry2.getValue());
-		}
+			break;
+			
+		case 2:
+			System.out.println("Enter the city: ");
+			String city = sc.next();
+			for (Entry<Long, Contact> entry2 : entry) {
+				String x = entry2.getValue().getCity();
+				if(x.equals(city)) {
+					System.out.println(entry2.getValue().getFirstName());
+				}
+				else {
+					System.out.println("Entered a unexisted city. So please enter a valid city.");
+				}
+			}
+			break;
+			
+		case 3:
+			System.out.println("Enter the state: ");
+			String state = sc.next();
+			for (Entry<Long, Contact> entry2 : entry) {
+				String y = entry2.getValue().getState();
+				if(y.equals(state)) {
+					System.out.println(entry2.getValue().getFirstName());
+				}
+				else {
+					System.out.println("Entered a unexisted state. So please enter a valid state.");
+				}
+			}
+			break;
 		
-		for (Entry<Long, Contact> entry2 : entry) {
-			String x = entry2.getValue().getCity();
-			String y = entry2.getValue().getState();
-			if(x.equals(city)) {
-				System.out.println(entry2.getValue().getFirstName());
-			}
-			if(y.equals(state)) {
-				System.out.println(entry2.getValue().getFirstName());
-			}
+		default:
+			System.out.println("Enter a valid option.");
 		}
+			
 	}
 
 	public void update(Long phoneNumber) {
@@ -77,11 +113,28 @@ public class AddressBook {
 	}
 	
 	public void print() {
-		Set<Entry<Long, Contact>> entry = contactBook.entrySet();
-		for (Entry<Long, Contact> entry2 : entry) {
-			System.out.println(entry2.getKey()+" "+entry2.getValue());
-		}	
-		Map<Long, Contact> result = (Map<Long, Contact>) contactBook.entrySet().stream().sorted();
-		System.out.println(result);
+		/*
+		 * Set<Entry<Long, Contact>> entry = contactBook.entrySet(); for (Entry<Long,
+		 * Contact> entry2 : entry) {
+		 * System.out.println(entry2.getKey()+" "+entry2.getValue()); }
+		 */
+		System.out.println("Before Sorting");  
+		contactBook.forEach((k,v)-> System.out.println(k+" "+v));
+		
+		System.out.println("After sorting based on values: ");
+		
+		Set<Entry<Long, Contact>> entrySet = contactBook.entrySet();
+		List<Entry<Long, Contact>> list = new ArrayList<>(entrySet);
+		
+		Collections.sort(list, new Comparator<Entry<Long, Contact>>(){
+
+			@Override
+			public int compare(Entry<Long, Contact> o1, Entry<Long, Contact> o2) {
+				return o1.getValue().firstName.compareTo(o2.getValue().firstName);
+			}
+			
+		});
+		
+		list.forEach(s-> System.out.println(s.getKey()+"\t"+s.getValue()));
 	}
 }

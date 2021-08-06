@@ -2,9 +2,13 @@ package com.bridgelbaz.addressbook;
 
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
 public class Main {
+	
 
 	public static void main(String[] args) {
+//		Logger logger = org.apache.log4j.LogManager.getLogger(Main.class);
 		System.out.println("Welcome to Address Book");
 
 		AddressBook addressBook = new AddressBook();
@@ -16,6 +20,7 @@ public class Main {
 			int option = sc.nextInt();
 			switch (option) {
 			case 1:
+				System.out.println("Enter the mobile number: ");
 				addressBook.add(sc.nextLong());
 				break;
 			case 2:
@@ -24,8 +29,9 @@ public class Main {
 				addressBook.get(phoneNumber);
 				break;
 			case 3:
-				System.out.println("Enter the name to search: ");
-				addressBook.search(sc.next(),sc.next(),sc.next());
+				System.out.println("Enter the number to search based: 1. FirstName 2. City 3. State");
+				int number = sc.nextInt();
+				addressBook.search(number);
 				break;
 			case 4:
 				System.out.println("Enter the mobile number to update the person's contact: ");
