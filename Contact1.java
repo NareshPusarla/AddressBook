@@ -1,6 +1,6 @@
 package com.bridgelabz.addressbooksystem;
 
-import java.util.Scanner;
+import java.util.Scanner; 
 
 public class Contact1 extends Contact{
 	public Contact1() {
